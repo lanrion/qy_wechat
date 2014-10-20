@@ -31,6 +31,11 @@ module QyWechat
       @source.FromUserName
     end
 
+    # 应用ID
+    def agent_id
+      @source.AgentID
+    end
+
     def self.factory(hash)
       case hash['MsgType']
       when 'text'
