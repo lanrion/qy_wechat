@@ -27,8 +27,11 @@ module QyWechat
       @source.MsgId.to_i
     end
 
-    def self.factory(xml)
-      hash = MultiXml.parse(xml)['xml']
+    def corp_id
+      @source.FromUserName
+    end
+
+    def self.factory(hash)
       case hash['MsgType']
       when 'text'
         TextMessage.new(hash)

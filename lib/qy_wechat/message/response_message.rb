@@ -38,36 +38,6 @@ module QyWechat
     end
   end
 
-  class Music
-    include ROXML
-    xml_accessor :Title, :cdata => true
-    xml_accessor :Description, :cdata => true
-    xml_accessor :MusicUrl,   :cdata => true
-    xml_accessor :HQMusicUrl, :cdata => true
-  end
-
-  # <xml>
-  # <ToUserName><![CDATA[toUser]]></ToUserName>
-  # <FromUserName><![CDATA[fromUser]]></FromUserName>
-  # <CreateTime>12345678</CreateTime>
-  # <MsgType><![CDATA[music]]></MsgType>
-  # <Music>
-  # <Title><![CDATA[TITLE]]></Title>
-  # <Description><![CDATA[DESCRIPTION]]></Description>
-  # <MusicUrl><![CDATA[MUSIC_Url]]></MusicUrl>
-  # <HQMusicUrl><![CDATA[HQ_MUSIC_Url]]></HQMusicUrl>
-  # <ThumbMediaId><![CDATA[media_id]]></ThumbMediaId>
-  # </Music>
-  # </xml>
-
-  class MusicResponseMessage < ResponseMessage
-    xml_accessor :Music, :as => Music
-    def initialize
-      super
-      @MsgType = 'music'
-    end
-  end
-
   class Article
     include ROXML
     xml_accessor :Title, :cdata => true

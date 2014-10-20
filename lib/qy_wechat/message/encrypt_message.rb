@@ -6,6 +6,7 @@
 #   <TimeStamp>timestamp</TimeStamp>
 #   <Nonce><![CDATA[nonce]]></Nonce>
 # </xml>
+
 module QyWechat
   class EncryptMessage
     include ROXML
