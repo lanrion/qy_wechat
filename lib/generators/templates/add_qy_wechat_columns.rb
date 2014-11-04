@@ -1,6 +1,6 @@
 class AddQyWechatColumnsTo<%= table_name.camelize %> < ActiveRecord::Migration
   def self.up
-    change_table(:<%= table_name %>) do |t|
+    create_table(:<%= table_name %>) do |t|
       t.string :qy_token
       t.string :encoding_aes_key
       t.string :corp_id

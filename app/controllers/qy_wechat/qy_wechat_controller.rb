@@ -12,9 +12,8 @@ module QyWechat
     def verify_url
       raise "Not Match" if not valid_msg_signature(params)
       params.delete(:qy_secret_key)
-      # TODO 验证企业ID是否一致
-      xml_content = Prpcrypt.decrypt(aes_key, params[:echostr], corp_id)
-      render text: xml_content
+      content = Prpcrypt.decrypt(aes_key, params[:echostr], corp_id)
+      render text: content
     end
 
     def reply;end

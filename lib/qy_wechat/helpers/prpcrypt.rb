@@ -13,7 +13,8 @@ module QyWechat
       len_list      = content[0...4].unpack("N")
       xml_len       = len_list[0]
       xml_content   = content[4...4 + xml_len]
-      # from_corpid = content[xml_len+4...content.size]
+      from_corpid = content[xml_len+4...content.size]
+      raise "UnMatch corpid" if corpid != from_corpid
       xml_content
     end
 
