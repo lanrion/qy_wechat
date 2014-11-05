@@ -7,9 +7,11 @@ https://github.com/lanrion/qy_wechat
 
 ## 安装
 
-目前家里网络无法 push 到rubygems（翻墙也不行），直接通过：
+通过：
 ```ruby
 gem 'qy_wechat', git: 'https://github.com/lanrion/qy_wechat.git'
+# or
+gem 'qy_wechat', '~> 1.0.0.beta1'
 ```
 安装。
 
