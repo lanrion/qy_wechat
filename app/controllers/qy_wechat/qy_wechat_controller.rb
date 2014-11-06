@@ -10,7 +10,11 @@ module QyWechat
 
     # 验证URL有效性
     def verify_url
-      raise "Not Match" if not valid_msg_signature(params)
+      if not valid_msg_signature(params)
+        Rails.logger.debug("#{__FILE__}:#{__LINE__} Failure because signature is invalid")
+        render text: "", status: 403
+        return
+      end
       params.delete(:qy_secret_key)
       content = Prpcrypt.decrypt(aes_key, params[:echostr], corp_id)
       render text: content

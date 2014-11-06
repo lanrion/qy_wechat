@@ -6,16 +6,20 @@ module QyWechat
     # 对密文进行解密.
     # text 需要解密的密文
     def decrypt(aes_key, text, corpid)
-      text          = Base64.decode64(text)
-      text          = handle_cipher(:decrypt, aes_key, text)
-      result        = PKCS7Encoder.decode(text)
-      content       = result[16...result.length]
-      len_list      = content[0...4].unpack("N")
-      xml_len       = len_list[0]
-      xml_content   = content[4...4 + xml_len]
+      status = 200
+      text        = Base64.decode64(text)
+      text        = handle_cipher(:decrypt, aes_key, text)
+      result      = PKCS7Encoder.decode(text)
+      content     = result[16...result.length]
+      len_list    = content[0...4].unpack("N")
+      xml_len     = len_list[0]
+      xml_content = content[4...4 + xml_len]
       from_corpid = content[xml_len+4...content.size]
-      raise "UnMatch corpid" if corpid != from_corpid
-      xml_content
+      if corpid != from_corpid
+        Rails.logger.debug("#{__FILE__}:#{__LINE__} Failure because corpid != from_corpid")
+        status = 403
+      end
+      [xml_content, status]
     end
 
     # 加密
