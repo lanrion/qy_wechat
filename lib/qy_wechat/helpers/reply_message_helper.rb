@@ -100,7 +100,7 @@ module QyWechat
         msg = EncryptMessage.new
         msg.Encrypt = encrypt_xml
         msg.TimeStamp = Time.now.to_i.to_s
-        msg.Nonce = "123"
+        msg.Nonce = SecureRandom.hex(8)
         msg.MsgSignature = generate_msg_signature(encrypt_xml, msg)
         msg.to_xml
       end
