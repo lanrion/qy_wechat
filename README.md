@@ -19,7 +19,7 @@ gem 'qy_wechat', git: 'https://github.com/lanrion/qy_wechat.git'
 
 ```ruby
 rails g qy_wechat:install
-rails g qy_wechat:migration QyWechat
+rails g qy_wechat:migration QyAccount # QyAccount 你保存企业号的Model
 ```
 分别会产生:
 
