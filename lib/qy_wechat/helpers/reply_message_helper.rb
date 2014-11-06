@@ -1,9 +1,6 @@
 module QyWechat
   module ReplyMessageHelper
 
-    # e.g.
-    # generate_text_message(@weixin_message.ToUserName, @weixin_message.FromUserName, "Your Message: #{@weixin_message.Content}")
-    # Or generate_text_message("Your Message: #{@weixin_message.Content}")
     def generate_text_message(from=nil, to=nil, content)
       message = TextResponseMessage.new
       message.FromUserName = from || @weixin_message.ToUserName
@@ -21,7 +18,6 @@ module QyWechat
       item
     end
 
-    # articles = [new_article]
     def generate_news_message(from=nil, to=nil, articles)
       message = NewsResponseMessage.new
       message.FromUserName = from || @weixin_message.ToUserName
@@ -38,18 +34,6 @@ module QyWechat
       video.Description = desc
       video
     end
-
-    # <xml>
-    # <ToUserName><![CDATA[toUser]]></ToUserName>
-    # <FromUserName><![CDATA[fromUser]]></FromUserName>
-    # <CreateTime>12345678</CreateTime>
-    # <MsgType><![CDATA[video]]></MsgType>
-    # <Video>
-    # <MediaId><![CDATA[media_id]]></MediaId>
-    # <Title><![CDATA[title]]></Title>
-    # <Description><![CDATA[description]]></Description>
-    # </Video>
-    # </xml>
 
     def generate_video_message(from=nil, to=nil, video)
       message = VideoResponseMessage.new
@@ -107,7 +91,6 @@ module QyWechat
 
       # dev_msg_signature=sha1(sort(token、timestamp、nonce、msg_encrypt))
       # 生成企业签名
-      # $array = array($encrypt_msg, $token, $timestamp, $nonce);
       def generate_msg_signature(encrypt_msg, msg)
         sort_params = [encrypt_msg, qy_token, msg.TimeStamp, msg.Nonce].sort.join
         Digest::SHA1.hexdigest(sort_params)
