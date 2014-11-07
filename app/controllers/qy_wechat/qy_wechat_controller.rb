@@ -5,10 +5,11 @@ module QyWechat
     include ReplyMessageHelper
 
     skip_before_filter :verify_authenticity_token, only: :reply
-    before_action :setup_qy_account, only: [:verify_url, :reply]
-    before_action :setup_wechat_message, only: :reply
+    before_filter :setup_qy_account, only: [:verify_url, :reply]
+    before_filter :setup_wechat_message, only: :reply
 
     # 验证URL有效性
+    # TODO: refactor
     def verify_url
       if not valid_msg_signature(params)
         Rails.logger.debug("#{__FILE__}:#{__LINE__} Failure because signature is invalid")
