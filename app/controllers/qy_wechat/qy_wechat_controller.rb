@@ -16,9 +16,8 @@ module QyWechat
         render text: "", status: 403
         return
       end
-      params.delete(:qy_secret_key)
-      content = Prpcrypt.decrypt(aes_key, params[:echostr], corp_id)
-      render text: content
+      content, status = Prpcrypt.decrypt(aes_key, params[:echostr], corp_id)
+      render text: content, status: status
     end
 
     def reply;end
@@ -29,7 +28,8 @@ module QyWechat
         param_xml = request.body.read
         hash = MultiXml.parse(param_xml)['xml']
         @body_xml = OpenStruct.new(hash)
-        hash = MultiXml.parse(Prpcrypt.decrypt(aes_key, @body_xml.Encrypt, corp_id))["xml"]
+        content = Prpcrypt.decrypt(aes_key, @body_xml.Encrypt, corp_id)[0]
+        hash = MultiXml.parse(content)["xml"]
         @weixin_message = Message.factory(hash)
         @keyword = @weixin_message.Content
       end
@@ -63,7 +63,8 @@ module QyWechat
       end
 
       def setup_qy_account
-        @qy_account ||= QyWechat.qy_model.find_by(qy_secret_key: params[:qy_secret_key])
+        qy_secret_key = params.delete(:qy_secret_key)
+        @qy_account ||= QyWechat.qy_model.find_by(qy_secret_key: qy_secret_key)
       end
   end
 end
