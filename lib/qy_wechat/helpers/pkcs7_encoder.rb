@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module QyWechat
   module PKCS7Encoder
     extend self

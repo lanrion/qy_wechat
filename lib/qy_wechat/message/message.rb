@@ -1,4 +1,5 @@
-# multi_xml will use Nokogiri if it is available
+# encoding: utf-8
+
 MultiXml.parser = :nokogiri
 
 module QyWechat
