@@ -3,8 +3,6 @@ https://github.com/lanrion/qy_wechat
 
 (对应公众号gem：https://github.com/lanrion/weixin_rails_middleware)
 
-由于工作太忙，目前wiki没有完善，这里简要说明：
-
 ## 安装
 
 目前只有Master稳定版本，务必通过：
