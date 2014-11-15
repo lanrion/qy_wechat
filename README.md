@@ -19,7 +19,7 @@ gem 'qy_wechat', git: 'https://github.com/lanrion/qy_wechat.git'
 
 ```ruby
 rails g qy_wechat:install
-rails g qy_wechat:migration QyAccount # QyAccount 你保存企业号的Model
+rails g qy_wechat:migration QyApp # QyAapp 你保存企业号应用的Model
 ```
 分别会产生:
 
@@ -29,9 +29,18 @@ rails g qy_wechat:migration QyAccount # QyAccount 你保存企业号的Model
 这里实现你的业务逻辑:
 `qy_wechat_example/app/decorators/controllers/qy_wechat/qy_wechat_controller_decorator.rb`
 
-同时在你的QyAccount中添加如下代码生成你的qy_secret_key：
+同时添加以下4个字段：
+
+* qy_token
+* encoding_aes_key # 长度固定为43个字符，从a-z, A-Z, 0-9共62个字符中选取
+* corp_id
+* qy_secret_key # 用于标志属于哪个应用
+
+**特别注意：** 由于一个企业号，可以对应多个应用，可以根据 `corp_id` 关联你保存对应的企业号应用。
+
+最后在你的QyApp中添加如下代码生成你的qy_secret_key：
 ```ruby
-class QyAccount < ActiveRecord::Base
+class QyApp < ActiveRecord::Base
 
   before_create :init_qy_secret_key
 
@@ -45,7 +54,7 @@ end
 
 ## 生成服务验证URL
 
-`qy_wechat_engine.qy_verify_url(qy_account.qy_secret_key)`
+`qy_wechat_engine.qy_verify_url(qy_app.qy_secret_key)`
 
 ## issue
 

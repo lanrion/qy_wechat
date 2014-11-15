@@ -5,7 +5,7 @@ module QyWechat
     include ReplyMessageHelper
 
     skip_before_filter :verify_authenticity_token, only: :reply
-    before_filter :setup_qy_account, only: [:verify_url, :reply]
+    before_filter :setup_qy_app, only: [:verify_url, :reply]
     before_filter :setup_wechat_message, only: :reply
 
     # 验证URL有效性
@@ -25,32 +25,33 @@ module QyWechat
     private
 
       def setup_wechat_message
-        param_xml = request.body.read
-        hash = MultiXml.parse(param_xml)['xml']
-        @body_xml = OpenStruct.new(hash)
-        content = Prpcrypt.decrypt(aes_key, @body_xml.Encrypt, corp_id)[0]
-        hash = MultiXml.parse(content)["xml"]
+        param_xml       = request.body.read
+        hash            = MultiXml.parse(param_xml)['xml']
+        @body_xml       = OpenStruct.new(hash)
+        content         = Prpcrypt.decrypt(aes_key, @body_xml.Encrypt, corp_id)[0]
+        hash            = MultiXml.parse(content)["xml"]
         @weixin_message = Message.factory(hash)
-        @keyword = @weixin_message.Content
+        @keyword        = @weixin_message.Content
       end
 
       def encoding_aes_key
-        @qy_account.encoding_aes_key
+        key = @qy_app.encoding_aes_key
+        raise "长度固定为43个字符" if key.length != 43
+        key
       end
 
       def qy_token
-        @qy_account.qy_token
+        @qy_app.qy_token
       end
 
       def aes_key
-        Base64.decode64(@qy_account.encoding_aes_key + "=")
+        Base64.decode64(@qy_app.encoding_aes_key + "=")
       end
 
       def corp_id
-        @qy_account.corp_id
+        @qy_app.corp_id
       end
 
-      # String signature = SHA1.getSHA1(token, timeStamp, nonce, echoStr);
       def valid_msg_signature(params)
         timestamp         = params[:timestamp]
         nonce             = params[:nonce]
@@ -62,9 +63,9 @@ module QyWechat
         current_signature == msg_signature
       end
 
-      def setup_qy_account
+      def setup_qy_app
         qy_secret_key = params.delete(:qy_secret_key)
-        @qy_account ||= QyWechat.qy_model.find_by(qy_secret_key: qy_secret_key)
+        @qy_app ||= QyWechat.qy_model.find_by(qy_secret_key: qy_secret_key)
       end
   end
 end
