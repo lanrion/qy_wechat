@@ -27,4 +27,9 @@ QyWechat::QyWechatController.class_eval do
       generate_video_message(new_video(@weixin_message.MediaId, "desc", "title"))
     end
 
+    # 用于响应事件
+    def response_event_message
+      generate_text_message("响应事件")
+    end
+
 end
