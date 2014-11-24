@@ -59,13 +59,13 @@ module QyWechat
         msg_signature     = params[:msg_signature]
         sort_params       = [qy_token, timestamp, nonce, echo_str].sort.join
         current_signature = Digest::SHA1.hexdigest(sort_params)
-        Rails.logger.info("current_signature: #{current_signature} " )
+        Rails.logger.info("current_signature: #{current_signature} ")
         current_signature == msg_signature
       end
 
       def setup_qy_app
         qy_secret_key = params.delete(:qy_secret_key)
-        @qy_app ||= QyWechat.qy_model.find_by(qy_secret_key: qy_secret_key)
+        @qy_app ||= QyWechat.qy_model.find_by!(qy_secret_key: qy_secret_key)
       end
   end
 end
