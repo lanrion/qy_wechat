@@ -65,7 +65,7 @@ module QyWechat
 
       def setup_qy_app
         qy_secret_key = params.delete(:qy_secret_key)
-        @qy_app ||= QyWechat.qy_model.find_by!(qy_secret_key: qy_secret_key)
+        @qy_app ||= QyWechat.qy_model.find_by_qy_secret_key!(qy_secret_key: qy_secret_key)
       end
   end
 end
