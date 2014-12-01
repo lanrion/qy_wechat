@@ -3,6 +3,8 @@ https://github.com/lanrion/qy_wechat
 
 (对应公众号gem：https://github.com/lanrion/weixin_rails_middleware)
 
+[![Gem Version](https://badge.fury.io/rb/qy_wechat.svg)](http://badge.fury.io/rb/qy_wechat)
+
 **重要说明：后期开发，不再支持Rails 4以下版本!**
 
 Rails 3 版本请使用（不再维护）:
@@ -15,6 +17,8 @@ gem 'qy_wechat', git: 'https://github.com/lanrion/qy_wechat.git', branch: "rails
 
 目前只有Master稳定版本，务必通过：
 ```ruby
+gem 'qy_wechat', '~> 1.0.0'
+# 或者
 gem 'qy_wechat', git: 'https://github.com/lanrion/qy_wechat.git'
 ```
 安装。
