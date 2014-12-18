@@ -28,7 +28,7 @@ QyWechat::QyWechatController.class_eval do
     end
 
     # 用于响应事件
-    def response_event_message
+    def response_event_message(options={})
       generate_text_message("响应事件")
     end
 
