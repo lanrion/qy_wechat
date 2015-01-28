@@ -7,11 +7,11 @@ https://github.com/lanrion/qy_wechat
 
 [![Gem Version](https://badge.fury.io/rb/qy_wechat.svg)](http://badge.fury.io/rb/qy_wechat)
 
+**特别注意： 由于一个企业号，可以对应多个应用，可以根据 `corp_id` 关联你保存对应的企业号应用。**
+
 **重要说明：后期开发，不再支持Rails 4以下版本!**
 
 Rails 3 版本请使用（不再维护）:
-
-**特别注意： 由于一个企业号，可以对应多个应用，可以根据 `corp_id` 关联你保存对应的企业号应用。**
 
 ```ruby
 gem 'qy_wechat', git: 'https://github.com/lanrion/qy_wechat.git', branch: "rails3"
