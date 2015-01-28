@@ -3,6 +3,8 @@ https://github.com/lanrion/qy_wechat
 
 (对应公众号gem：https://github.com/lanrion/weixin_rails_middleware)
 
+企业微信高级API：https://github.com/lanrion/qy_wechat_api
+
 [![Gem Version](https://badge.fury.io/rb/qy_wechat.svg)](http://badge.fury.io/rb/qy_wechat)
 
 **重要说明：后期开发，不再支持Rails 4以下版本!**
