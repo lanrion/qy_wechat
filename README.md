@@ -9,15 +9,16 @@ https://github.com/lanrion/qy_wechat
 
 Rails 3 版本请使用（不再维护）:
 
+**特别注意： 由于一个企业号，可以对应多个应用，可以根据 `corp_id` 关联你保存对应的企业号应用。**
+
 ```ruby
 gem 'qy_wechat', git: 'https://github.com/lanrion/qy_wechat.git', branch: "rails3"
 ```
 
 ## 安装
 
-目前只有Master稳定版本，务必通过：
 ```ruby
-gem 'qy_wechat', '~> 1.0.0'
+gem 'qy_wechat', '~> 1.0.1'
 # 或者
 gem 'qy_wechat', git: 'https://github.com/lanrion/qy_wechat.git'
 ```
@@ -45,8 +46,6 @@ rails g qy_wechat:migration QyApp # QyAapp 你保存企业号应用的Model
 * encoding_aes_key # 长度固定为43个字符，从a-z, A-Z, 0-9共62个字符中选取
 * corp_id
 * qy_secret_key # 用于标志属于哪个应用
-
-**特别注意：** 由于一个企业号，可以对应多个应用，可以根据 `corp_id` 关联你保存对应的企业号应用。
 
 最后在你的QyApp中添加如下代码生成你的qy_secret_key：
 ```ruby
