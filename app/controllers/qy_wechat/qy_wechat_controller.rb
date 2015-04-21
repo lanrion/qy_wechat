@@ -26,6 +26,7 @@ module QyWechat
 
       def setup_wechat_message
         param_xml       = request.body.read
+        Rails.logger.debug("DEBUG WECHAT MESSAGE: #{param_xml}")
         hash            = MultiXml.parse(param_xml)['xml']
         @body_xml       = OpenStruct.new(hash)
         content         = Prpcrypt.decrypt(aes_key, @body_xml.Encrypt, corp_id)[0]
