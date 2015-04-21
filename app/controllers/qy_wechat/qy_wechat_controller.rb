@@ -25,6 +25,7 @@ module QyWechat
     private
 
       def setup_wechat_message
+        Rails.logger.debug("encoding_aes_key: #{encoding_aes_key}, qy_token: #{qy_token}, corp_id: #{corp_id}")
         param_xml       = request.body.read
         Rails.logger.debug("DEBUG WECHAT MESSAGE: #{param_xml}")
         hash            = MultiXml.parse(param_xml)['xml']
