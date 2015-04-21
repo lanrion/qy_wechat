@@ -17,7 +17,7 @@ module QyWechat
       from_corpid = content[xml_len+4...content.size]
       # TODO: refactor
       if corpid != from_corpid
-        Rails.logger.debug("#{__FILE__}:#{__LINE__} Failure because corpid != from_corpid")
+        Rails.logger.debug("#{__FILE__}:#{__LINE__} Failure because #{corpid} != #{from_corpid}")
         status = 401
       end
       [xml_content, status]
