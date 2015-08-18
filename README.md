@@ -75,4 +75,4 @@ end
 
   如果你觉得我的gem对你有帮助，欢迎打赏支持，:smile:
 
-  ![](https://raw.githubusercontent.com/lanrion/my_config/master/imagex/donation_me.png)
+  ![](https://raw.githubusercontent.com/lanrion/my_config/master/imagex/donation_me_wx.jpg)
